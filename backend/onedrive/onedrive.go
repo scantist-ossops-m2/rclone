@@ -74,7 +74,7 @@ var (
 
 	// When using client credential OAuth flow, scope of .default is required in order
 	// to use the permissions configured for the application within the tenant
-	scopeAccessClientCred = fs.SpaceSepList{".default"}
+	//scopeAccessClientCred = fs.SpaceSepList{".default"}
 
 	// Description of how to auth for this app for a business account.
 	// This uses the configuration structure from the OAuth utils package
@@ -554,14 +554,14 @@ func Config(ctx context.Context, name string, m configmap.Mapper, conf fs.Config
 		oauthConfig.AuthURL = authEndpoint[region] + authPath
 
 		// Check to see if we are using client credentials flow
-		if clientCredentialsStr, ok := m.Get(config.ConfigClientCredentials); ok {
-			clientCredentials, err := strconv.ParseBool(clientCredentialsStr)
-			if err != nil {
-				fs.Errorf(nil, "Invalid setting for %q: %v", config.ConfigClientCredentials, err)
-			} else if clientCredentials {
-				oauthConfig.Scopes = scopeAccessClientCred
-			}
-		}
+		// if clientCredentialsStr, ok := m.Get(config.ConfigClientCredentials); ok {
+		// 	clientCredentials, err := strconv.ParseBool(clientCredentialsStr)
+		// 	if err != nil {
+		// 		fs.Errorf(nil, "Invalid setting for %q: %v", config.ConfigClientCredentials, err)
+		// 	} else if clientCredentials {
+		// 		oauthConfig.Scopes = scopeAccessClientCred
+		// 	}
+		// }
 		return oauthutil.ConfigOut("choose_type", &oauthutil.Options{
 			OAuth2Config: oauthConfig,
 		})
